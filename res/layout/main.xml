@@ -3,12 +3,22 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#F5E478" android:padding="8px">
+    android:background="#F5E478" android:padding="8px" android:scrollbars="vertical">
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:text="@string/hello"
     android:textColor="#000000"/>
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:text="@string/current_order"
+    android:textColor="#000000"/>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/add_item"
+    />
 <RadioGroup
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

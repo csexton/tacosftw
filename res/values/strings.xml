@@ -2,6 +2,8 @@
 <resources>
     <string name="hello">Welcome to District Taco! We specialize in healthy tacos made with high-quality ingredients and prepared fresh daily. Fill out the information below to place an order with us now!</string>
     <string name="app_name">District Taco</string>
+    <string name="current_order">Current Items in Order</string>
+    <string name="add_item">Add Item to Order</string>
     <string name="place_order">Place Order</string>
     <string name="pickup">I will pick up my order (Please allow 30 minutes to fill your order)</string>
     <string name="delivery">I am interested in delivery, please contact us for availability (Please allow 60 minutes to deliver your order)</string>
