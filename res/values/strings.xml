@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Welcome to District Taco! We specialize in healthy tacos made with high-quality ingredients and prepared fresh daily. Fill out the information below to place an order with us now!</string>
+    <string name="hello">Welcome to District Taco! We specialize in healthy tacos made with high-quality ingredients and prepared fresh daily. We also feature a different lunch special every day!</string>
     <string name="app_name">District Taco</string>
-    <string name="current_order">Current Items in Order</string>
+    <string name="settings_title">My Settings</string>
+    <string name="view_orders_title">View Orders</string>
+    <string name="photos_title">Taco Photos</string>
+    <string name="settings">Settings</string>
+    <string name="view_orders">My Orders</string>
+    <string name="photos">Photos</string>
     <string name="add_item">Add Item to Order</string>
+    <string name="special">Today\'s Lunch Special: %s</string>
+    <string name="not_announced">Our chef is still working on it, please check back later!</string>
     <string name="place_order">Place Order</string>
-    <string name="pickup">I will pick up my order (Please allow 30 minutes to fill your order)</string>
-    <string name="delivery">I am interested in delivery, please contact us for availability (Please allow 60 minutes to deliver your order)</string>
+    <string name="pickup">Pickup (allow 30 mins)</string>
+    <string name="delivery">Delivery (allow 60 mins)</string>
     <string name="time">Time for pickup/delivery:</string>
+    <string name="quit">Exit</string>
+    <string name="name">Name</string>
+    <string name="name_summary">Your name</string>
+    <string name="phone">Phone number</string>
+    <string name="phone_summary">Phone number at which you wish to be contacted for order verification</string>
+    <string name="email">Email address</string>
+    <string name="email_summary">Your email address</string>
 </resources>
