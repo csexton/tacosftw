@@ -22,4 +22,6 @@
     <string name="phone_summary">Phone number at which you wish to be contacted for order verification</string>
     <string name="email">Email address</string>
     <string name="email_summary">Your email address</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="create_order">Create Order</string>
 </resources>
