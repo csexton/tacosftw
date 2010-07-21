@@ -3,6 +3,7 @@
       package="com.districttaco.android"
       android:versionCode="1"
       android:versionName="1.0">
+	<uses-permission android:name="android.permission.INTERNET" />
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
         <activity android:name=".DistrictTaco"
                   android:label="@string/app_name">
@@ -19,6 +20,12 @@
         </activity>
         <activity android:name=".Photos"
                   android:label="@string/photos_title">
+        </activity>
+        <activity android:name=".EditOrder"
+                  android:label="@string/edit_order_title">
+        </activity>
+        <activity android:name=".EditItem"
+                  android:label="@string/edit_item_title">
         </activity>
 
     </application>

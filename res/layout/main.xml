@@ -17,5 +17,6 @@ android:layout_gravity="center_horizontal"/>
 <TextView android:id="@+id/special"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
+    android:text="@string/special"
     android:textColor="#000000"/>
 </LinearLayout>
