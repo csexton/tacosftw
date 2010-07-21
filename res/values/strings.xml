@@ -27,4 +27,5 @@
     <string name="create_order">Create Order</string>
     <string name="edit_order_title">Add/Edit Order</string>
     <string name="edit_item_title">Add/Edit Item</string>
+    <string name="picture_title">Take Picture</string>
 </resources>

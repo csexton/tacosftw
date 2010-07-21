@@ -1,6 +1,7 @@
 package com.districttaco.android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,9 @@ public class Photos extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case R.id.add_photo:
+        	startActivity(new Intent(this, CameraPreview.class));
+        	return true;
         }
         return super.onOptionsItemSelected(item);
     }
