@@ -30,8 +30,6 @@
         <activity android:name=".EditItem"
                   android:label="@string/edit_item_title">
         </activity>
-        <activity android:name=".CameraPreview">
-        </activity>
 
     </application>
     <uses-sdk android:minSdkVersion="7" />

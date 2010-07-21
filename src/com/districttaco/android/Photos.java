@@ -1,8 +1,10 @@
 package com.districttaco.android;
 
+import java.io.File;
+
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +29,10 @@ public class Photos extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.add_photo:
-        	startActivity(new Intent(this, CameraPreview.class));
+        	String state = Environment.getExternalStorageState();
+        	if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+        		File path = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        	}
         	return true;
         }
         return super.onOptionsItemSelected(item);
