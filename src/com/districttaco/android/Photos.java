@@ -1,7 +1,5 @@
 package com.districttaco.android;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,7 +29,6 @@ public class Photos extends Activity {
         case R.id.add_photo:
         	String state = Environment.getExternalStorageState();
         	if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-        		File path = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         	}
         	return true;
         }
