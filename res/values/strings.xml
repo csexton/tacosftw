@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Welcome to District Taco! We specialize in healthy tacos made with high-quality ingredients and prepared fresh daily. We also feature a different lunch special every day!</string>
     <string name="app_name">District Taco</string>
     <string name="settings_title">My Settings</string>
     <string name="view_orders_title">View Orders</string>
@@ -10,7 +9,7 @@
     <string name="view_orders">My Orders</string>
     <string name="photos">Photos</string>
     <string name="add_item">Add Item to Order</string>
-    <string name="special">Today\'s Lunch Special:</string>
+    <string name="special">Today\'s special:</string>
     <string name="not_announced">Our chef is still working on it, please check back later!</string>
     <string name="place_order">Place Order</string>
     <string name="pickup">Pickup (allow 30 mins)</string>
@@ -29,7 +28,6 @@
     <string name="edit_item_title">Add/Edit Item</string>
     <string name="picture_title">Take Picture</string>
     <string name="status_fail">Failed to load</string>
-    <string name="cart_location">Cart Location:</string>
-    <string name="latest_news">Latest News:</string>
+    <string name="cart_location">Where is District Taco today?</string>
 <string name="prev_orders">Previous Orders</string>
 </resources>
