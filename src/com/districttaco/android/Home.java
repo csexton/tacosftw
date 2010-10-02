@@ -36,10 +36,6 @@ public class Home extends Activity {
         case R.id.view_orders:
         	startActivity(new Intent(this, ViewOrders.class));
             return true;
-        	
-        case R.id.photos:
-        	startActivity(new Intent(this, Photos.class));
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }

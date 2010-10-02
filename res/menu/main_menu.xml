@@ -6,7 +6,4 @@
     <item android:id="@+id/view_orders"
           android:icon="@android:drawable/ic_menu_edit"
           android:title="@string/view_orders" />
-    <item android:id="@+id/photos"
-          android:icon="@android:drawable/ic_menu_slideshow"
-          android:title="@string/photos" />
 </menu>
