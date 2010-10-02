@@ -15,14 +15,24 @@ android:layout_gravity="center_horizontal"/>
     android:text="@string/hello"
     android:textColor="#000000"/>
 <TextView android:id="@+id/special"
+	android:textSize="15sp"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:text="@string/special"
     android:textColor="#000000" android:textStyle="bold"/>
 <TextView android:id="@+id/special_details" android:textColor="#000000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+<TextView android:id="@+id/cart_location"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+	android:textSize="15sp"
+    android:text="@string/cart_location"
+    android:textColor="#000000" android:textStyle="bold"/>
+<TextView android:id="@+id/location_name" android:textColor="#000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="italic"></TextView>
+<TextView android:id="@+id/location_description" android:textColor="#000000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 <TextView android:id="@+id/latest_news"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
+	android:textSize="15sp"
     android:text="@string/latest_news"
     android:textColor="#000000" android:textStyle="bold"/>
 <TextView android:id="@+id/info_title" android:textColor="#000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView>

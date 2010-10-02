@@ -50,6 +50,10 @@ public class Home extends Activity {
         	// set the user elements with the info
         	TextView specialDetails = (TextView) findViewById(R.id.special_details);
         	specialDetails.setText(Status.getStatusText());
+        	TextView locationName = (TextView) findViewById(R.id.location_name);
+        	locationName.setText(Status.getLocationName());
+        	TextView locationDescription = (TextView) findViewById(R.id.location_description);
+        	locationDescription.setText(Status.getLocationDescription());
         	TextView infoTitle = (TextView) findViewById(R.id.info_title);
         	infoTitle.setText(Status.getInfoTitle());
         	TextView infoHeader = (TextView) findViewById(R.id.info_header);
