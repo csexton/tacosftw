@@ -29,6 +29,10 @@ public class Home extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case R.id.refresh:
+        	updateStatus();
+        	return true;
+        	
         case R.id.settings:
         	startActivity(new Intent(this, Settings.class));
         	return true;
