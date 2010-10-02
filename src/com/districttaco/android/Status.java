@@ -41,6 +41,8 @@ public class Status {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				// load new values
 				JSONObject info = status.getJSONObject("info");
 				infoTitle = info.getString("title");
 				infoHeader = info.getString("header");

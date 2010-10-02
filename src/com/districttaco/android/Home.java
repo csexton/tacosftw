@@ -49,17 +49,17 @@ public class Home extends Activity {
         if (Status.updateStatus()) {
         	// set the user elements with the info
         	TextView specialDetails = (TextView) findViewById(R.id.special_details);
-        	specialDetails.setText(Status.getStatusText());
+        	specialDetails.setText(Status.getStatusText() != null ? Status.getStatusText() : "");
         	TextView locationName = (TextView) findViewById(R.id.location_name);
-        	locationName.setText(Status.getLocationName());
+        	locationName.setText(Status.getLocationName() != null ? Status.getLocationName() : "");
         	TextView locationDescription = (TextView) findViewById(R.id.location_description);
-        	locationDescription.setText(Status.getLocationDescription());
+        	locationDescription.setText(Status.getLocationDescription() != null ? Status.getLocationDescription() : "");
         	TextView infoTitle = (TextView) findViewById(R.id.info_title);
-        	infoTitle.setText(Status.getInfoTitle());
+        	infoTitle.setText(Status.getInfoTitle() != null ? Status.getInfoTitle() : "");
         	TextView infoHeader = (TextView) findViewById(R.id.info_header);
-        	infoHeader.setText(Status.getInfoHeader());
+        	infoHeader.setText(Status.getInfoHeader() != null ? Status.getInfoHeader() : "");
         	TextView infoBody = (TextView) findViewById(R.id.info_body);
-        	infoBody.setText(Status.getInfoBody());
+        	infoBody.setText(Status.getInfoBody() != null ? Status.getInfoBody() : "");
         } else {
         	TextView specialDetails = (TextView) findViewById(R.id.special_details);
         	specialDetails.setText(R.string.status_fail);
