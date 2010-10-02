@@ -14,7 +14,10 @@ public class Home extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        Status.UpdateStatus();
+        // this makes the http call to retrieve the status
+        if (!Status.updateStatus()) {
+        	// do something here to alert the user
+        }
     }
         
     @Override

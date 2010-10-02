@@ -9,13 +9,15 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.json.*;
+import android.location.Location;
 
 public class Status {
-	static float lat = 0.0f;
-	static float lng = 0.0f;
-	static Date lastUpdate = null; 
+	static double lat = 0.0f;
+	static double lng = 0.0f;
+	static String status_text = null;
+	static Date lastUpdate = null;
 	
-	static public boolean UpdateStatus()
+	static public boolean updateStatus()
 	{
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet("http://carte.districttaco.com/status.json");
@@ -23,11 +25,14 @@ public class Status {
 			HttpResponse resp = client.execute(request);
 			String body = EntityUtils.toString(resp.getEntity());
 			try {
+				// extract the contents from the json feed
 				JSONObject json = new JSONObject(body);
 				JSONObject status = json.getJSONArray("statuses").getJSONObject(0);
+				JSONObject info = status.getJSONObject("info");
 				JSONObject location = status.getJSONObject("location");
-				lat = Float.parseFloat(location.get("latitude").toString());
-				lng = Float.parseFloat(location.get("longitude").toString());
+				lat = location.getDouble("latitude");
+				lng = location.getDouble("longitude");
+				status_text = status.getString("body");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -40,5 +45,9 @@ public class Status {
 		}
 		
 		return true;
+	}
+	
+	static double getLatitude() {
+		return lat;
 	}
 }
