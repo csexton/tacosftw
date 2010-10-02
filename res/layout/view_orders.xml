@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#F5E478" android:padding="8dip" android:scrollbars="vertical">
+    android:background="#FFD06C" android:padding="8dip" android:scrollbars="vertical">
 <TextView android:text="@string/prev_orders" android:textColor="#000000" android:id="@+id/prev_orders" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 <Button android:id="@+id/create_order_button"
     android:layout_width="fill_parent" 
