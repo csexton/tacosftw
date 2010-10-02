@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Home extends Activity {
     /** Called when the activity is first created. */
@@ -14,10 +15,7 @@ public class Home extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        // this makes the http call to retrieve the status
-        if (!Status.updateStatus()) {
-        	// do something here to alert the user
-        }
+        updateStatus();
     }
         
     @Override
@@ -44,5 +42,23 @@ public class Home extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    private void updateStatus() {
+        // this makes the http call to retrieve the status
+        if (Status.updateStatus()) {
+        	// set the user elements with the info
+        	TextView specialDetails = (TextView) findViewById(R.id.special_details);
+        	specialDetails.setText(Status.getStatusText());
+        	TextView infoTitle = (TextView) findViewById(R.id.info_title);
+        	infoTitle.setText(Status.getInfoTitle());
+        	TextView infoHeader = (TextView) findViewById(R.id.info_header);
+        	infoHeader.setText(Status.getInfoHeader());
+        	TextView infoBody = (TextView) findViewById(R.id.info_body);
+        	infoBody.setText(Status.getInfoBody());
+        } else {
+        	TextView specialDetails = (TextView) findViewById(R.id.special_details);
+        	specialDetails.setText(R.string.status_fail);
+        }
     }
 }

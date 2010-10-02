@@ -9,6 +9,11 @@
     android:layout_height="wrap_content"
     android:text="@string/add_item"
     android:textColor="#000000" android:drawableLeft="@android:drawable/ic_input_add" android:gravity="left|center_vertical"/>
+<Button android:id="@+id/place_order_button"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:text="@string/place_order"
+    android:textColor="#000000" />
 <ListView android:id="@+id/item_list"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" />
