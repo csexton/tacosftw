@@ -3,6 +3,9 @@
     <item android:id="@+id/refresh"
           android:icon="@drawable/ic_menu_refresh"
           android:title="@string/refresh" />
+    <item android:id="@+id/view_map"
+          android:icon="@android:drawable/ic_menu_mapmode"
+          android:title="@string/view_map" />
     <item android:id="@+id/settings"
           android:icon="@android:drawable/ic_menu_preferences"
           android:title="@string/settings" />

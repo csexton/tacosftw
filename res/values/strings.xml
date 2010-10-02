@@ -30,5 +30,7 @@
     <string name="status_fail">Failed to load</string>
     <string name="cart_location">Where is District Taco today?</string>
     <string name="refresh">Refresh</string>
+    <string name="view_map">View Map</string>
+    <string name="map_title">Cart Location</string>
 <string name="prev_orders">Previous Orders</string>
 </resources>

@@ -30,10 +30,23 @@ public class Home extends Activity {
     }
 
     @Override
+    public boolean onMenuOpened(int featureId, Menu menu)
+    {
+    	MenuItem mapMenuItem = menu.getItem(1);
+    	mapMenuItem.setEnabled(Status.getLatitude() != 0.0 && Status.getLongitude() != 0.0);
+    	
+    	return true;
+    }
+    
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.refresh:
         	updateStatus();
+        	return true;
+        	
+        case R.id.view_map:
+        	startActivity(new Intent(this, Map.class));
         	return true;
         	
         case R.id.settings:
