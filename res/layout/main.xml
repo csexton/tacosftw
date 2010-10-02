@@ -13,12 +13,8 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#DDDDDD">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="#F1F1E0" android:layout_margin="8dip" android:padding="8dip">
+	android:background="@drawable/rounded_corners"
+    android:layout_margin="8dip" android:padding="16dip">
 <TextView android:id="@+id/cart_location"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
@@ -37,6 +33,5 @@
 <TextView android:id="@+id/info_header" android:textColor="#000000" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView>
 <TextView android:id="@+id/info_title" android:textSize="18sp" android:textColor="#7BAF6B" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textStyle="bold"></TextView>
 <TextView android:id="@+id/info_body" android:textColor="#000000" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-</LinearLayout>
 </LinearLayout>
 </LinearLayout>
