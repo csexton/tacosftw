@@ -49,13 +49,13 @@ public class Home extends Activity {
         	startActivity(new Intent(this, Map.class));
         	return true;
         	
-        case R.id.settings:
-        	startActivity(new Intent(this, Settings.class));
-        	return true;
+//        case R.id.settings:
+//        	startActivity(new Intent(this, Settings.class));
+//        	return true;
         	
-        case R.id.view_orders:
-        	startActivity(new Intent(this, ViewOrders.class));
-            return true;
+//        case R.id.view_orders:
+//        	startActivity(new Intent(this, ViewOrders.class));
+//        	return true;
         }
         return super.onOptionsItemSelected(item);
     }
