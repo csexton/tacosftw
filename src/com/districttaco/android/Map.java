@@ -21,16 +21,19 @@ public class Map extends MapActivity {
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
         
-        GeoPoint point = new GeoPoint((int)(Status.getLatitude() * 1E6), (int)(Status.getLongitude() * 1E6));
-        OverlayItem overlayItem = new OverlayItem(point, "", "");
-        mapOverlays = mapView.getOverlays();
-        drawable = this.getResources().getDrawable(R.drawable.cartmarker);
-        cartOverlay = new CartItemizedOverlay(drawable);
-        cartOverlay.addOverlay(overlayItem);
-        mapOverlays.add(cartOverlay);
-        MapController controller = mapView.getController();
-        controller.setZoom(5);
-        controller.setCenter(point);
+        // make sure we have coordinates to display before we do anything
+        if (Status.getLatitude() != 0.0 && Status.getLongitude()!= 0.0) {
+        	GeoPoint point = new GeoPoint((int)(Status.getLatitude() * 1E6), (int)(Status.getLongitude() * 1E6));
+        	OverlayItem overlayItem = new OverlayItem(point, "", "");
+        	mapOverlays = mapView.getOverlays();
+        	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
+        	cartOverlay = new CartItemizedOverlay(drawable);
+        	cartOverlay.addOverlay(overlayItem);
+        	mapOverlays.add(cartOverlay);
+        	MapController controller = mapView.getController();
+        	controller.setZoom(5);
+        	controller.setCenter(point);
+        }
     }
 
 	@Override
