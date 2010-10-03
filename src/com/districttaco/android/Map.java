@@ -28,6 +28,9 @@ public class Map extends MapActivity {
         cartOverlay = new CartItemizedOverlay(drawable);
         cartOverlay.addOverlay(overlayItem);
         mapOverlays.add(cartOverlay);
+        MapController controller = mapView.getController();
+        controller.setZoom(5);
+        controller.setCenter(point);
     }
 
 	@Override
