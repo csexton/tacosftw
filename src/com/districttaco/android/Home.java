@@ -42,7 +42,7 @@ public class Home extends Activity {
     
     public void launchTwitter(View v)
     {
-    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/districttaco")));
+    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/districttaco")));
     }
     
     @Override
