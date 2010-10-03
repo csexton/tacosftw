@@ -2,10 +2,12 @@ package com.districttaco.android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class Home extends Activity {
@@ -36,6 +38,11 @@ public class Home extends Activity {
     	mapMenuItem.setEnabled(Status.getLatitude() != 0.0 && Status.getLongitude() != 0.0);
     	
     	return true;
+    }
+    
+    public void launchTwitter(View v)
+    {
+    	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/districttaco")));
     }
     
     @Override
