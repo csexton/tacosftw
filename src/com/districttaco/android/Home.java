@@ -1,5 +1,18 @@
 package com.districttaco.android;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +24,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Home extends Activity {
+	private List<Status> statuses;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,15 +46,6 @@ public class Home extends Activity {
         return true;
     }
 
-    @Override
-    public boolean onMenuOpened(int featureId, Menu menu)
-    {
-    	MenuItem mapMenuItem = menu.getItem(1);
-    	mapMenuItem.setEnabled(Status.getLatitude() != 0.0 && Status.getLongitude() != 0.0);
-    	
-    	return true;
-    }
-    
     public void launchTwitter(View v)
     {
     	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/districttaco")));
@@ -67,25 +73,56 @@ public class Home extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
-    private void updateStatus() {
-        // this makes the http call to retrieve the status
-        if (Status.updateStatus()) {
-        	// set the user elements with the info
-        	TextView specialDetails = (TextView) findViewById(R.id.special_details);
-        	specialDetails.setText(Status.getStatusText() != null ? Status.getStatusText() : "");
-        	TextView locationName = (TextView) findViewById(R.id.location_name);
-        	locationName.setText(Status.getLocationName() != null ? Status.getLocationName() : "");
-        	TextView locationDescription = (TextView) findViewById(R.id.location_description);
-        	locationDescription.setText(Status.getLocationDescription() != null ? Status.getLocationDescription() : "");
-        	TextView infoTitle = (TextView) findViewById(R.id.info_title);
-        	infoTitle.setText(Status.getInfoTitle() != null ? Status.getInfoTitle() : "");
-        	TextView infoHeader = (TextView) findViewById(R.id.info_header);
-        	infoHeader.setText(Status.getInfoHeader() != null ? Status.getInfoHeader() : "");
-        	TextView infoBody = (TextView) findViewById(R.id.info_body);
-        	infoBody.setText(Status.getInfoBody() != null ? Status.getInfoBody() : "");
-        } else {
-        	TextView specialDetails = (TextView) findViewById(R.id.special_details);
-        	specialDetails.setText(R.string.status_fail);
-        }
+    private boolean updateStatus() {
+        // make the http call to retrieve the status
+		HttpClient client = new DefaultHttpClient();
+		HttpGet request = new HttpGet("http://carte.districttaco.com/status.json");
+		try {
+			HttpResponse resp = client.execute(request);
+			String body = EntityUtils.toString(resp.getEntity());
+			try {
+				// we've successfully fetched the feed, wipe out all current status info
+				statuses.clear();
+				
+				// extract the contents from the json feed
+				JSONObject json = new JSONObject(body);
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+				int len = json.getJSONArray("statuses").length();
+				for (int i = 0; i < len; i++)
+				{
+					// load new values
+					JSONObject currentStatus = json.getJSONArray("statuses").getJSONObject(i);
+					Status status = new Status();
+					try {
+						status.setLastUpdate(formatter.parse(currentStatus.getString("updated_at")));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}					
+					JSONObject info = currentStatus.getJSONObject("info");
+					status.setInfoTitle(info.getString("title"));
+					status.setInfoHeader(info.getString("header"));
+					status.setInfoBody(info.getString("body"));
+					JSONObject location = currentStatus.getJSONObject("location");
+					status.setLocationName(location.getString("name"));
+					status.setLocationDescription(location.getString("description"));
+					status.setLatitude(location.getDouble("latitude"));
+					status.setLongitude(location.getDouble("longitude"));
+					status.setStatusText(currentStatus.getString("body"));
+					
+					// status object is fully populated, add it to the list
+					statuses.add(status);
+				}
+				
+				// dynamically create the UI from the status objects
+			} catch (JSONException e) {
+				e.printStackTrace();
+				return false;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+        
+        return true;
     }
 }

@@ -22,7 +22,7 @@ public class Map extends MapActivity {
         mapView.setBuiltInZoomControls(true);
         
         // make sure we have coordinates to display before we do anything
-        if (Status.getLatitude() != 0.0 && Status.getLongitude()!= 0.0) {
+/*        if (Status.getLatitude() != 0.0 && Status.getLongitude()!= 0.0) {
         	GeoPoint point = new GeoPoint((int)(Status.getLatitude() * 1E6), (int)(Status.getLongitude() * 1E6));
         	OverlayItem overlayItem = new OverlayItem(point, "", "");
         	mapOverlays = mapView.getOverlays();
@@ -34,7 +34,7 @@ public class Map extends MapActivity {
         	controller.setZoom(5);
         	controller.setCenter(point);
         }
-    }
+*/    }
 
 	@Override
 	protected boolean isRouteDisplayed() {
