@@ -31,16 +31,19 @@ public class Map extends MapActivity {
         	mapOverlays = mapView.getOverlays();
         	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
         	cartOverlay = new CartItemizedOverlay(drawable);
+        	int pointsAdded = 0;
         	for (int i = 0; i < statuses.size(); i++)
         	{
         		Status status = statuses.get(i);
-//		        if (status.getLatitude() != 0.0 && status.getLongitude()!= 0.0) {
+		        if (status.getLatitude() != 0.0 && status.getLongitude()!= 0.0) {
 		        	GeoPoint point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
-		        	OverlayItem overlayItem = new OverlayItem(point, "", "");
+		        	OverlayItem overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
 		        	cartOverlay.addOverlay(overlayItem);
-//		        }
+		        	pointsAdded++;
+		        }
         	}
-        	mapOverlays.add(cartOverlay);
+        	if (pointsAdded > 0)
+        		mapOverlays.add(cartOverlay);
         	MapController controller = mapView.getController();
         	controller.setZoom(12);
         }
