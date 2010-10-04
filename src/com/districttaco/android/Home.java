@@ -89,6 +89,8 @@ public class Home extends Activity {
 		HttpGet request = new HttpGet("http://carte.districttaco.com/status.json");
 		try {
 			HttpResponse resp = client.execute(request);
+			if (resp.getStatusLine().getStatusCode() != 200)
+				return false;
 			String body = EntityUtils.toString(resp.getEntity());
 			try {
 				// we've successfully fetched the feed, wipe out all current status info
