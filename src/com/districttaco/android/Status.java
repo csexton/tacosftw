@@ -124,7 +124,7 @@ public class Status implements Parcelable {
 		lat = in.readDouble();
 		lng = in.readDouble();
 		statusText = in.readString();
-		lastUpdate.setTime(in.readLong());
+		lastUpdate = new Date(in.readLong());
 		infoHeader = in.readString();
 		infoTitle = in.readString();
 		infoBody = in.readString();
