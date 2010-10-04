@@ -101,18 +101,20 @@ public class Status implements Parcelable {
 	}
 
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
 		dest.writeInt(postId);
 		dest.writeString(locationName);
 		dest.writeString(locationDescription);
 		dest.writeDouble(lat);
 		dest.writeDouble(lng);
 		dest.writeString(statusText);
+		dest.writeLong(lastUpdate.getTime());
+		dest.writeString(infoHeader);
+		dest.writeString(infoTitle);
+		dest.writeString(infoBody);
 	}
 	
 	Status(Parcel in) {
@@ -122,6 +124,10 @@ public class Status implements Parcelable {
 		lat = in.readDouble();
 		lng = in.readDouble();
 		statusText = in.readString();
+		lastUpdate.setTime(in.readLong());
+		infoHeader = in.readString();
+		infoTitle = in.readString();
+		infoBody = in.readString();
 	}
 
 	public static final Parcelable.Creator<Status> CREATOR = new Parcelable.Creator<Status>() {
