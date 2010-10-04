@@ -2,7 +2,10 @@ package com.districttaco.android;
 
 import java.util.Date;
 
-public class Status {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Status implements Parcelable {
 	private int postId;
 	private double lat;
 	private double lng;
@@ -14,6 +17,9 @@ public class Status {
 	private String infoHeader;
 	private String infoBody;
 	
+	public Status() {
+	}
+
 	public void setLocationName(String val) {
 		locationName = val;
 	}
@@ -93,4 +99,38 @@ public class Status {
 	public int getPostId() {
 		return postId;
 	}
+
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		dest.writeInt(postId);
+		dest.writeString(locationName);
+		dest.writeString(locationDescription);
+		dest.writeDouble(lat);
+		dest.writeDouble(lng);
+		dest.writeString(statusText);
+	}
+	
+	Status(Parcel in) {
+		postId = in.readInt();
+		locationName = in.readString();
+		locationDescription = in.readString();
+		lat = in.readDouble();
+		lng = in.readDouble();
+		statusText = in.readString();
+	}
+
+	public static final Parcelable.Creator<Status> CREATOR = new Parcelable.Creator<Status>() {
+		public Status createFromParcel(Parcel in) {
+			return new Status(in);
+		}
+
+		public Status[] newArray(int size) {
+			return new Status[size];
+		}
+	};
 }

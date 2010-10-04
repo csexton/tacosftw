@@ -1,5 +1,6 @@
 package com.districttaco.android;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,7 @@ public class Map extends MapActivity {
 	private List<Overlay> mapOverlays;
 	private CartItemizedOverlay cartOverlay;
 	private Drawable drawable;
+	private ArrayList<Status> statuses;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,20 +23,28 @@ public class Map extends MapActivity {
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
         
-        // make sure we have coordinates to display before we do anything
-/*        if (Status.getLatitude() != 0.0 && Status.getLongitude()!= 0.0) {
-        	GeoPoint point = new GeoPoint((int)(Status.getLatitude() * 1E6), (int)(Status.getLongitude() * 1E6));
-        	OverlayItem overlayItem = new OverlayItem(point, "", "");
+        // add our markers
+        Bundle bundle = getIntent().getExtras();
+        statuses = bundle.getParcelableArrayList("statuses");
+        if (statuses != null && statuses.size() > 0)
+        {
         	mapOverlays = mapView.getOverlays();
         	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
         	cartOverlay = new CartItemizedOverlay(drawable);
-        	cartOverlay.addOverlay(overlayItem);
+        	for (int i = 0; i < statuses.size(); i++)
+        	{
+        		Status status = statuses.get(i);
+//		        if (status.getLatitude() != 0.0 && status.getLongitude()!= 0.0) {
+		        	GeoPoint point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
+		        	OverlayItem overlayItem = new OverlayItem(point, "", "");
+		        	cartOverlay.addOverlay(overlayItem);
+//		        }
+        	}
         	mapOverlays.add(cartOverlay);
         	MapController controller = mapView.getController();
-        	controller.setZoom(5);
-        	controller.setCenter(point);
+        	controller.setZoom(12);
         }
-*/    }
+    }
 
 	@Override
 	protected boolean isRouteDisplayed() {

@@ -53,6 +53,10 @@ public class Home extends Activity {
     	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/districttaco")));
     }
     
+    public ArrayList<Status> getStatuses() {
+    	return statuses;
+    }
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -61,7 +65,11 @@ public class Home extends Activity {
         	return true;
         	
         case R.id.view_map:
-        	startActivity(new Intent(this, Map.class));
+        	Intent intent = new Intent(this, Map.class);
+        	Bundle bundle = new Bundle();
+        	bundle.putParcelableArrayList("statuses", statuses);
+        	intent.putExtras(bundle);
+        	startActivity(intent);
         	return true;
         	
 //        case R.id.settings:
