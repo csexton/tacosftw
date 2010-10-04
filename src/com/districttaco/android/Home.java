@@ -3,7 +3,7 @@ package com.districttaco.android;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,10 +22,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Home extends Activity {
-	private List<Status> statuses;
+	private ArrayList<Status> statuses = new ArrayList<Status>();
 	
     /** Called when the activity is first created. */
     @Override
@@ -114,6 +116,42 @@ public class Home extends Activity {
 				}
 				
 				// dynamically create the UI from the status objects
+				LinearLayout container = (LinearLayout) findViewById(R.id.statuses);
+				container.removeAllViews();
+				Context context = container.getContext();
+				for (int i = 0; i < statuses.size(); i++)
+				{
+					// here, we dynamically create the various text elements and add them to our container
+					Status status = statuses.get(i);
+					TextView locationName = new TextView(context);
+					locationName.setText(status.getLocationName());
+					locationName.setTextAppearance(context, R.style.GreenHeader);
+					container.addView(locationName);
+					TextView locationDescription = new TextView(context);
+					locationDescription.setText(status.getLocationDescription());
+					locationDescription.setTextAppearance(context, R.style.Default);
+					container.addView(locationDescription);
+					TextView special = new TextView(context);
+					special.setText(R.string.special);
+					special.setTextAppearance(context, R.style.GreenHeader);
+					container.addView(special);
+					TextView statusDetail = new TextView(context);
+					statusDetail.setText(status.getStatusText());
+					statusDetail.setTextAppearance(context, R.style.Default);
+					container.addView(statusDetail);
+					TextView infoHeader = new TextView(context);
+					infoHeader.setText(status.getInfoHeader());
+					infoHeader.setTextAppearance(context, R.style.DefaultBold);
+					container.addView(infoHeader);
+					TextView infoTitle = new TextView(context);
+					infoTitle.setText(status.getInfoTitle());
+					infoTitle.setTextAppearance(context, R.style.GreenHeader);
+					container.addView(infoTitle);
+					TextView infoBody = new TextView(context);
+					infoBody.setText(status.getInfoBody());
+					infoBody.setTextAppearance(context, R.style.Default);
+					container.addView(infoBody);
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 				return false;
