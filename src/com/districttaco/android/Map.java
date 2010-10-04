@@ -31,7 +31,7 @@ public class Map extends MapActivity {
         	mapOverlays = mapView.getOverlays();
         	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
         	cartOverlay = new CartItemizedOverlay(drawable);
-        	int pointsAdded = 0;
+        	GeoPoint lastPoint = null;
         	for (int i = 0; i < statuses.size(); i++)
         	{
         		Status status = statuses.get(i);
@@ -39,13 +39,16 @@ public class Map extends MapActivity {
 		        	GeoPoint point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
 		        	OverlayItem overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
 		        	cartOverlay.addOverlay(overlayItem);
-		        	pointsAdded++;
+		        	lastPoint = point;
 		        }
         	}
-        	if (pointsAdded > 0)
+        	if (lastPoint != null)
+        	{
         		mapOverlays.add(cartOverlay);
-        	MapController controller = mapView.getController();
-        	controller.setZoom(12);
+        		MapController controller = mapView.getController();
+        		controller.setCenter(lastPoint);
+        		controller.setZoom(12);
+        	}
         }
     }
 
