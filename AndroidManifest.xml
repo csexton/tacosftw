@@ -13,26 +13,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Settings"
-                  android:label="@string/settings_title">
-        </activity>
-        <activity android:name=".ViewOrders"
-                  android:label="@string/view_orders_title">
-        </activity>
-        <activity android:name=".Photos"
-                  android:label="@string/photos_title">
-        </activity>
-        <activity android:name=".EditOrder"
-                  android:label="@string/edit_order_title">
-        </activity>
-        <activity android:name=".EditItem"
-                  android:label="@string/edit_item_title">
-        </activity>
         <activity android:name=".Map"
                   android:label="@string/map_title">
         </activity>
 
     </application>
-    <uses-sdk android:minSdkVersion="7" />
+    <uses-sdk android:minSdkVersion="8" />
 
 </manifest> 
