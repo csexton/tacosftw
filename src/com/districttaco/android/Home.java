@@ -19,7 +19,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -42,10 +41,16 @@ public class Home extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        updateStatus();
+        if (savedInstanceState == null)
+        	updateStatus();
+        else
+        {
+        	statuses = savedInstanceState.getParcelableArrayList("statuses");
+        	updateUiFromStatuses();
+        }
     }
     
-    private void updateStatus() {
+	private void updateStatus() {
         try {
         	progressDialog = ProgressDialog.show(this, null, getResources().getText(R.string.status_loading));
 			new UpdateStatusTask().execute(new URL(statusUrl));
@@ -57,12 +62,18 @@ public class Home extends Activity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle bundle)
+    {
+    	bundle.putParcelableArrayList("statuses", statuses);
+    }
+    
+    @Override
 	public boolean onMenuOpened(int featureId, Menu menu) {
     	MenuItem mapItem = menu.getItem(1);
     	mapItem.setEnabled(statuses != null);
 		return super.onMenuOpened(featureId, menu);
     }
-        
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
@@ -74,6 +85,52 @@ public class Home extends Activity {
     public void launchTwitter(View v)
     {
     	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/districttaco")));
+    }
+    
+    private void updateUiFromStatuses() {
+		
+		// dynamically create the UI from the status objects
+		LinearLayout container = (LinearLayout) findViewById(R.id.statuses);
+		container.removeAllViews();
+		for (int i = 0; i < statuses.size(); i++)
+		{
+			// here, we dynamically create the various text elements and add them to our container
+			com.districttaco.android.Status status = statuses.get(i);
+			TextView locationName = new TextView(this);
+			locationName.setText(status.getLocationName());
+			locationName.setTextAppearance(this, R.style.GreenHeader);
+			container.addView(locationName);
+			TextView locationDescription = new TextView(this);
+			locationDescription.setText(status.getLocationDescription());
+			locationDescription.setTextAppearance(this, R.style.Default);
+			container.addView(locationDescription);
+			TextView special = new TextView(this);
+			special.setText(R.string.special);
+			special.setTextAppearance(this, R.style.GreenHeader);
+			container.addView(special);
+			TextView statusDetail = new TextView(this);
+			statusDetail.setText(status.getStatusText());
+			statusDetail.setTextAppearance(this, R.style.Default);
+			container.addView(statusDetail);
+			TextView infoHeader = new TextView(this);
+			infoHeader.setText(status.getInfoHeader());
+			infoHeader.setTextAppearance(this, R.style.DefaultBold);
+			container.addView(infoHeader);
+			TextView infoTitle = new TextView(this);
+			infoTitle.setText(status.getInfoTitle());
+			infoTitle.setTextAppearance(this, R.style.GreenHeader);
+			container.addView(infoTitle);
+			TextView infoBody = new TextView(this);
+			infoBody.setText(status.getInfoBody());
+			infoBody.setTextAppearance(this, R.style.Default);
+			container.addView(infoBody);
+		}
+		TextView lastUpdate = new TextView(this);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Update: 'yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		lastUpdate.setText(dateFormat.format(date));
+		lastUpdate.setTextAppearance(this, R.style.Small);
+		container.addView(lastUpdate);
     }
     
     @Override
@@ -162,55 +219,18 @@ public class Home extends Activity {
     	}
     	
     	protected void onPostExecute(ArrayList<com.districttaco.android.Status> result) {
-    		progressDialog.dismiss();
-    		progressDialog = null;
+    		// if we are displaying a progress dialog, it's time to dismiss it
+    		if (progressDialog != null)
+    		{
+    			progressDialog.dismiss();
+    			progressDialog = null;
+    		}
+    		
+    		// populate the UI with the results
     		if (result != null && result.size() > 0) {
     			// save this in our instance
     			statuses = result;
-    			
-    			// dynamically create the UI from the status objects
-    			LinearLayout container = (LinearLayout) findViewById(R.id.statuses);
-    			container.removeAllViews();
-    			Context context = container.getContext();
-    			for (int i = 0; i < result.size(); i++)
-    			{
-    				// here, we dynamically create the various text elements and add them to our container
-    				com.districttaco.android.Status status = result.get(i);
-    				TextView locationName = new TextView(context);
-    				locationName.setText(status.getLocationName());
-    				locationName.setTextAppearance(context, R.style.GreenHeader);
-    				container.addView(locationName);
-    				TextView locationDescription = new TextView(context);
-    				locationDescription.setText(status.getLocationDescription());
-    				locationDescription.setTextAppearance(context, R.style.Default);
-    				container.addView(locationDescription);
-    				TextView special = new TextView(context);
-    				special.setText(R.string.special);
-    				special.setTextAppearance(context, R.style.GreenHeader);
-    				container.addView(special);
-    				TextView statusDetail = new TextView(context);
-    				statusDetail.setText(status.getStatusText());
-    				statusDetail.setTextAppearance(context, R.style.Default);
-    				container.addView(statusDetail);
-    				TextView infoHeader = new TextView(context);
-    				infoHeader.setText(status.getInfoHeader());
-    				infoHeader.setTextAppearance(context, R.style.DefaultBold);
-    				container.addView(infoHeader);
-    				TextView infoTitle = new TextView(context);
-    				infoTitle.setText(status.getInfoTitle());
-    				infoTitle.setTextAppearance(context, R.style.GreenHeader);
-    				container.addView(infoTitle);
-    				TextView infoBody = new TextView(context);
-    				infoBody.setText(status.getInfoBody());
-    				infoBody.setTextAppearance(context, R.style.Default);
-    				container.addView(infoBody);
-    			}
-    			TextView lastUpdate = new TextView(context);
-    			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Update: 'yyyy/MM/dd HH:mm:ss");
-    			Date date = new Date();
-    			lastUpdate.setText(dateFormat.format(date));
-    			lastUpdate.setTextAppearance(context, R.style.Small);
-    			container.addView(lastUpdate);
+    			updateUiFromStatuses();
     		}
     	}
     }
