@@ -33,6 +33,7 @@ import android.widget.TextView;
 public class Home extends Activity {
 	private final String statusUrl = "http://carte.districttaco.com/status.json";
 	private ArrayList<Status> statuses = null;
+	private Date lastStatusFetch = null;
 	private ProgressDialog progressDialog = null;
 	
     /** Called when the activity is first created. */
@@ -46,6 +47,7 @@ public class Home extends Activity {
         else
         {
         	statuses = savedInstanceState.getParcelableArrayList("statuses");
+        	lastStatusFetch = new Date(savedInstanceState.getLong("lastStatusFetch"));
         	updateUiFromStatuses();
         }
     }
@@ -65,7 +67,10 @@ public class Home extends Activity {
     public void onSaveInstanceState(Bundle bundle)
     {
     	if (statuses != null)
+    	{
     		bundle.putParcelableArrayList("statuses", statuses);
+    		bundle.putLong("lastStatusFetch", lastStatusFetch.getTime());
+    	}
     }
     
     @Override
@@ -126,12 +131,16 @@ public class Home extends Activity {
 			infoBody.setTextAppearance(this, R.style.Default);
 			container.addView(infoBody);
 		}
-		TextView lastUpdate = new TextView(this);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Update: 'yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		lastUpdate.setText(dateFormat.format(date));
-		lastUpdate.setTextAppearance(this, R.style.Small);
-		container.addView(lastUpdate);
+		
+		// show the time of the last successful fetch
+		if (lastStatusFetch != null)
+		{
+			TextView lastUpdate = new TextView(this);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Update: 'yyyy/MM/dd HH:mm:ss");
+			lastUpdate.setText(dateFormat.format(lastStatusFetch));
+			lastUpdate.setTextAppearance(this, R.style.Small);
+			container.addView(lastUpdate);
+		}
     }
     
     @Override
@@ -207,7 +216,7 @@ public class Home extends Activity {
     					
     					// status object is fully populated, add it to the list
     					newStatuses.add(status);
-    				}				
+    				}
     			} catch (JSONException e) {
     				e.printStackTrace();
     				return null;
@@ -231,6 +240,7 @@ public class Home extends Activity {
     		if (result != null && result.size() > 0) {
     			// save this in our instance
     			statuses = result;
+				lastStatusFetch = new Date();
     			updateUiFromStatuses();
     		}
     	}
