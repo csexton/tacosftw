@@ -64,7 +64,8 @@ public class Home extends Activity {
     @Override
     public void onSaveInstanceState(Bundle bundle)
     {
-    	bundle.putParcelableArrayList("statuses", statuses);
+    	if (statuses != null)
+    		bundle.putParcelableArrayList("statuses", statuses);
     }
     
     @Override
