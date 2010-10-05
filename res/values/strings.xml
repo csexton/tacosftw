@@ -29,7 +29,7 @@
     <string name="picture_title">Take Picture</string>
     <string name="status_fail">Lo siento! We couldn\'t find any carts, please check again pronto!</string>
     <string name="cart_location">Where is District Taco today?</string>
-    <string name="refresh">Refresh</string>
+    <string name="refresh">Find Carts</string>
     <string name="view_map">View Map</string>
     <string name="map_title">Cart Location</string>
     <string name="status_loading">Looking for carts...</string>

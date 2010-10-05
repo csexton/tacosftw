@@ -7,6 +7,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -38,11 +39,8 @@ public class Home extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-    }
-    
-    protected void onResume() {
-    	super.onResume();
-    	try {
+
+        try {
 			new UpdateStatusTask().execute(new URL(statusUrl));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -200,6 +198,12 @@ public class Home extends Activity {
     				infoBody.setTextAppearance(context, R.style.Default);
     				container.addView(infoBody);
     			}
+    			TextView lastUpdate = new TextView(context);
+    			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Update: 'yyyy/MM/dd HH:mm:ss");
+    			Date date = new Date();
+    			lastUpdate.setText(dateFormat.format(date));
+    			lastUpdate.setTextAppearance(context, R.style.Small);
+    			container.addView(lastUpdate);
     		}
     		else {
     			// update the status view, if it's still on the screen
