@@ -27,7 +27,7 @@
     <string name="edit_order_title">Add/Edit Order</string>
     <string name="edit_item_title">Add/Edit Item</string>
     <string name="picture_title">Take Picture</string>
-    <string name="status_fail">Failed to load</string>
+    <string name="status_fail">Lo siento! We couldn\'t find any carts, please check again pronto!</string>
     <string name="cart_location">Where is District Taco today?</string>
     <string name="refresh">Refresh</string>
     <string name="view_map">View Map</string>

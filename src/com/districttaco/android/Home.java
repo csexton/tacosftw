@@ -201,6 +201,12 @@ public class Home extends Activity {
     				container.addView(infoBody);
     			}
     		}
+    		else {
+    			// update the status view, if it's still on the screen
+    			TextView statusView = (TextView) findViewById(R.id.status);
+    			if (statusView != null)
+    				statusView.setText(R.string.status_fail);
+    		}
     	}
     }
 }
