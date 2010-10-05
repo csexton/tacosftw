@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,20 +34,28 @@ import android.widget.TextView;
 public class Home extends Activity {
 	private final String statusUrl = "http://carte.districttaco.com/status.json";
 	private ArrayList<Status> statuses = null;
+	private ProgressDialog progressDialog = null;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+        
+        updateStatus();
+    }
+    
+    private void updateStatus() {
         try {
+        	progressDialog = ProgressDialog.show(this, null, getResources().getText(R.string.status_loading));
 			new UpdateStatusTask().execute(new URL(statusUrl));
 		} catch (MalformedURLException e) {
+			progressDialog.dismiss();
+			progressDialog = null;
 			e.printStackTrace();
 		}
     }
-    
+
     @Override
 	public boolean onMenuOpened(int featureId, Menu menu) {
     	MenuItem mapItem = menu.getItem(1);
@@ -71,11 +80,7 @@ public class Home extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.refresh:
-        	try {
-				new UpdateStatusTask().execute(new URL(statusUrl));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+        	updateStatus();
         	return true;
         	
         case R.id.view_map:
@@ -157,6 +162,8 @@ public class Home extends Activity {
     	}
     	
     	protected void onPostExecute(ArrayList<com.districttaco.android.Status> result) {
+    		progressDialog.dismiss();
+    		progressDialog = null;
     		if (result != null && result.size() > 0) {
     			// save this in our instance
     			statuses = result;
@@ -204,12 +211,6 @@ public class Home extends Activity {
     			lastUpdate.setText(dateFormat.format(date));
     			lastUpdate.setTextAppearance(context, R.style.Small);
     			container.addView(lastUpdate);
-    		}
-    		else {
-    			// update the status view, if it's still on the screen
-    			TextView statusView = (TextView) findViewById(R.id.status);
-    			if (statusView != null)
-    				statusView.setText(R.string.status_fail);
     		}
     	}
     }
