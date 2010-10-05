@@ -106,7 +106,7 @@ public class Home extends Activity {
 
     	@Override
     	protected ArrayList<com.districttaco.android.Status> doInBackground(URL... params) {
-    		ArrayList<com.districttaco.android.Status> statuses = new ArrayList<com.districttaco.android.Status>();
+    		ArrayList<com.districttaco.android.Status> newStatuses = new ArrayList<com.districttaco.android.Status>();
             // make the http call to retrieve the status
     		HttpClient client = new DefaultHttpClient();
     		HttpGet request;
@@ -148,7 +148,7 @@ public class Home extends Activity {
     					status.setStatusText(currentStatus.getString("body"));
     					
     					// status object is fully populated, add it to the list
-    					statuses.add(status);
+    					newStatuses.add(status);
     				}				
     			} catch (JSONException e) {
     				e.printStackTrace();
@@ -158,7 +158,7 @@ public class Home extends Activity {
     			e.printStackTrace();
     			return null;
     		}
-     		return statuses;
+     		return newStatuses;
     	}
     	
     	protected void onPostExecute(ArrayList<com.districttaco.android.Status> result) {
