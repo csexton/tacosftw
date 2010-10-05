@@ -98,7 +98,7 @@ public class Home extends Activity {
 				
 				// extract the contents from the json feed
 				JSONObject json = new JSONObject(body);
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 				int len = json.getJSONArray("statuses").length();
 				for (int i = 0; i < len; i++)
 				{
