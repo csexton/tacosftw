@@ -47,7 +47,7 @@ public class Map extends MapActivity {
         		mapOverlays.add(cartOverlay);
         		MapController controller = mapView.getController();
         		controller.setCenter(lastPoint);
-        		controller.setZoom(13);
+        		controller.setZoom(15);
         	}
         }
     }
