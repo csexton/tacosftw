@@ -32,6 +32,6 @@
     <string name="refresh">Refresh</string>
     <string name="view_map">View Map</string>
     <string name="map_title">Cart Location</string>
-    <string name="loading">Looking for carts...</string>
+    <string name="status_loading">Looking for carts...</string>
 <string name="prev_orders">Previous Orders</string>
 </resources>

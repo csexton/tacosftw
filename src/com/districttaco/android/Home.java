@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 public class Home extends Activity {
 	private final String statusUrl = "http://carte.districttaco.com/status.json";
-	private ArrayList<Status> statuses = new ArrayList<Status>();
+	private ArrayList<Status> statuses = null;
 	
     /** Called when the activity is first created. */
     @Override
@@ -47,6 +47,13 @@ public class Home extends Activity {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    @Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+    	MenuItem mapItem = menu.getItem(1);
+    	mapItem.setEnabled(statuses != null);
+		return super.onMenuOpened(featureId, menu);
     }
         
     @Override
