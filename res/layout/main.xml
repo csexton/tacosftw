@@ -37,6 +37,6 @@
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:src="@drawable/follow_us"
-	android:layout_gravity="center_horizontal" android:onClick="launchTwitter"/>
+	android:layout_gravity="center_horizontal" android:onClick="launchTwitter" android:paddingTop="8sp"/>
 </LinearLayout>
 </ScrollView>
