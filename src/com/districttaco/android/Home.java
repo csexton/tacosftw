@@ -118,19 +118,19 @@ public class Home extends Activity {
 			com.districttaco.android.Status status = statuses.get(i);
 			TextView locationName = new TextView(this);
 			locationName.setText(status.getLocationName());
-			locationName.setTextAppearance(this, R.style.GreenHeader);
+			locationName.setTextAppearance(this, R.style.StatusHeader);
 			container.addView(locationName);
 			TextView locationDescription = new TextView(this);
 			locationDescription.setText(status.getLocationDescription());
-			locationDescription.setTextAppearance(this, R.style.Default);
+			locationDescription.setTextAppearance(this, R.style.StatusContent);
 			container.addView(locationDescription);
 			TextView special = new TextView(this);
 			special.setText(R.string.special);
-			special.setTextAppearance(this, R.style.GreenHeader);
+			special.setTextAppearance(this, R.style.StatusHeader);
 			container.addView(special);
 			TextView statusDetail = new TextView(this);
 			statusDetail.setText(status.getStatusText());
-			statusDetail.setTextAppearance(this, R.style.Default);
+			statusDetail.setTextAppearance(this, R.style.StatusContent);
 			container.addView(statusDetail);
 			TextView infoHeader = new TextView(this);
 			infoHeader.setText(status.getInfoHeader());
@@ -138,11 +138,11 @@ public class Home extends Activity {
 			container.addView(infoHeader);
 			TextView infoTitle = new TextView(this);
 			infoTitle.setText(status.getInfoTitle());
-			infoTitle.setTextAppearance(this, R.style.GreenHeader);
+			infoTitle.setTextAppearance(this, R.style.StatusHeader);
 			container.addView(infoTitle);
 			TextView infoBody = new TextView(this);
 			infoBody.setText(status.getInfoBody());
-			infoBody.setTextAppearance(this, R.style.Default);
+			infoBody.setTextAppearance(this, R.style.StatusContent);
 			container.addView(infoBody);
 		}
 		
