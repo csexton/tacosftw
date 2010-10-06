@@ -243,7 +243,7 @@ public class Home extends Activity {
     		}
     		
     		// populate the UI with the results
-    		if (result != null && result.size() > 0) {
+    		if (result != null) {
     			// save this in our instance
     			statuses = result;
 				lastStatusFetch = new Date();
