@@ -46,10 +46,24 @@ public class Home extends Activity {
         	updateStatus();
         else
         {
+        	// get the saved state
         	statuses = savedInstanceState.getParcelableArrayList("statuses");
         	lastStatusFetch = new Date(savedInstanceState.getLong("lastStatusFetch"));
-        	updateUiFromStatuses();
+        	updateUiFromCurrentStatus();
         }
+    }
+    
+    @Override
+    protected void onResume() {    	
+    	// calculate the time since the last fetch, if it's more than 6 hours we force a pull (operating carts is a temporal business, after all)
+    	if (lastStatusFetch != null) {
+	    	Date now = new Date();
+	    	long elapsedMilliSec = now.getTime() - lastStatusFetch.getTime();
+	    	if (elapsedMilliSec > 21600000)
+	    		updateStatus();
+    	}
+    	
+    	super.onResume();
     }
     
 	private void updateStatus() {
@@ -93,7 +107,7 @@ public class Home extends Activity {
     	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/districttaco")));
     }
     
-    private void updateUiFromStatuses() {
+    private void updateUiFromCurrentStatus() {
 		
 		// dynamically create the UI from the status objects
 		LinearLayout container = (LinearLayout) findViewById(R.id.statuses);
@@ -136,7 +150,7 @@ public class Home extends Activity {
 		if (lastStatusFetch != null)
 		{
 			TextView lastUpdate = new TextView(this);
-			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Updated: 'MMM d h:mm a");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Updated:' E MMM d h:mm a");
 			lastUpdate.setText(dateFormat.format(lastStatusFetch));
 			lastUpdate.setTextAppearance(this, R.style.Small);
 			container.addView(lastUpdate);
@@ -233,7 +247,7 @@ public class Home extends Activity {
     			// save this in our instance
     			statuses = result;
 				lastStatusFetch = new Date();
-    			updateUiFromStatuses();
+    			updateUiFromCurrentStatus();
     		}
     	}
     }
