@@ -20,12 +20,24 @@
     android:layout_height="wrap_content"
 	android:background="@drawable/rounded_corners"
     android:layout_margin="8dip" android:padding="16dip">
+<LinearLayout
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
 <TextView android:id="@+id/cart_location"
-    android:layout_width="fill_parent" 
+    android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
 	android:textSize="16sp"
     android:text="@string/cart_location"
     android:textColor="#000000" android:textStyle="bold" />
+<ProgressBar android:id="@+id/progress"
+	android:layout_width="20dip"
+	android:layout_height="20dip"
+	android:visibility="invisible"
+	android:layout_marginLeft="10dip"
+	android:indeterminateDrawable="@drawable/progress_spin"
+	android:indeterminateOnly="true" android:background="#F1F1E0"/>
+</LinearLayout>
 <LinearLayout
 	android:id="@+id/statuses"
     android:orientation="vertical"

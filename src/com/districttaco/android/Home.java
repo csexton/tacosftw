@@ -28,19 +28,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class Home extends Activity {
 	private final String statusUrl = "http://carte.districttaco.com/status.json";
 	private ArrayList<Status> statuses = null;
 	private Date lastStatusFetch = null;
-	private ProgressDialog progressDialog = null;
+	private ProgressBar progressBar = null;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        // get the progress bar
+        progressBar = (ProgressBar) findViewById(R.id.progress);
         
         if (savedInstanceState == null)
         	updateStatus();
@@ -68,11 +72,10 @@ public class Home extends Activity {
     
 	private void updateStatus() {
         try {
-        	progressDialog = ProgressDialog.show(this, null, getResources().getText(R.string.status_loading));
+        	progressBar.setVisibility(View.VISIBLE);
 			new UpdateStatusTask().execute(new URL(statusUrl));
 		} catch (MalformedURLException e) {
-			progressDialog.dismiss();
-			progressDialog = null;
+        	progressBar.setVisibility(View.INVISIBLE);
 			e.printStackTrace();
 		}
     }
@@ -235,12 +238,8 @@ public class Home extends Activity {
     	}
     	
     	protected void onPostExecute(ArrayList<com.districttaco.android.Status> result) {
-    		// if we are displaying a progress dialog, it's time to dismiss it
-    		if (progressDialog != null)
-    		{
-    			progressDialog.dismiss();
-    			progressDialog = null;
-    		}
+    		// hide the progress bar
+        	progressBar.setVisibility(View.INVISIBLE);
     		
     		// populate the UI with the results
     		if (result != null) {
