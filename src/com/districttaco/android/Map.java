@@ -30,7 +30,7 @@ public class Map extends MapActivity {
         {
         	mapOverlays = mapView.getOverlays();
         	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
-        	cartOverlay = new CartItemizedOverlay(drawable);
+        	cartOverlay = new CartItemizedOverlay(drawable, this);
         	GeoPoint lastPoint = null;
         	for (int i = 0; i < statuses.size(); i++)
         	{
