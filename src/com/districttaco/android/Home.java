@@ -134,7 +134,7 @@ public class Home extends Activity {
 			container.addView(statusDetail);
 			TextView infoHeader = new TextView(this);
 			infoHeader.setText(status.getInfoHeader());
-			infoHeader.setTextAppearance(this, R.style.DefaultBold);
+			infoHeader.setTextAppearance(this, R.style.InfoHeader);
 			container.addView(infoHeader);
 			TextView infoTitle = new TextView(this);
 			infoTitle.setText(status.getInfoTitle());
