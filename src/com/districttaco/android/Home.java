@@ -152,7 +152,7 @@ public class Home extends Activity {
 			TextView lastUpdate = new TextView(this);
 			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Updated:' E MMM d h:mm a");
 			lastUpdate.setText(dateFormat.format(lastStatusFetch));
-			lastUpdate.setTextAppearance(this, R.style.Small);
+			lastUpdate.setTextAppearance(this, R.style.Footer);
 			container.addView(lastUpdate);
 		}
     }
