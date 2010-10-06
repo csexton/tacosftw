@@ -136,7 +136,7 @@ public class Home extends Activity {
 		if (lastStatusFetch != null)
 		{
 			TextView lastUpdate = new TextView(this);
-			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Update: 'yyyy/MM/dd HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("'Last Updated: 'MMM d h:mm a");
 			lastUpdate.setText(dateFormat.format(lastStatusFetch));
 			lastUpdate.setTextAppearance(this, R.style.Small);
 			container.addView(lastUpdate);
@@ -157,14 +157,6 @@ public class Home extends Activity {
         	intent.putExtras(bundle);
         	startActivity(intent);
         	return true;
-        	
-//        case R.id.settings:
-//        	startActivity(new Intent(this, Settings.class));
-//        	return true;
-        	
-//        case R.id.view_orders:
-//        	startActivity(new Intent(this, ViewOrders.class));
-//        	return true;
         }
         return super.onOptionsItemSelected(item);
     }
