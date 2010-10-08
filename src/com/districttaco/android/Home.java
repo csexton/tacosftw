@@ -80,14 +80,7 @@ public class Home extends Activity {
     	}
     }
     
-    @Override
-	public boolean onMenuOpened(int featureId, Menu menu) {
-    	MenuItem mapItem = menu.getItem(1);
-    	mapItem.setEnabled(statuses != null);
-		return super.onMenuOpened(featureId, menu);
-    }
-    
-    @Override
+     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
