@@ -35,7 +35,7 @@ public class Map extends MapActivity {
         	for (int i = 0; i < statuses.size(); i++)
         	{
         		Status status = statuses.get(i);
-		        if (status.getLatitude() != 0.0 && status.getLongitude()!= 0.0) {
+		        if (status.getLatitude() != 0.0 && status.getLongitude() != 0.0) {
 		        	GeoPoint point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
 		        	OverlayItem overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
 		        	cartOverlay.addOverlay(overlayItem);
