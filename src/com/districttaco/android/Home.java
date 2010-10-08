@@ -34,8 +34,8 @@ import android.widget.TextView;
 public class Home extends Activity {
 	private final String statusUrl = "http://carte.districttaco.com/status.json";
 	private ArrayList<Status> statuses = null;
-	private Date lastStatusFetch = null;
 	private ProgressBar progressBar = null;
+	private boolean updateOnResume = true;
 	
     /** Called when the activity is first created. */
     @Override
@@ -46,27 +46,18 @@ public class Home extends Activity {
         // get the progress bar
         progressBar = (ProgressBar) findViewById(R.id.progress);
         
-        if (savedInstanceState == null)
-        	updateStatus();
-        else
-        {
-        	// get the saved state
+        if (savedInstanceState != null) {
         	statuses = savedInstanceState.getParcelableArrayList("statuses");
-        	lastStatusFetch = new Date(savedInstanceState.getLong("lastStatusFetch"));
         	updateUiFromCurrentStatus();
+        	updateOnResume = false;
         }
     }
     
     @Override
-    protected void onResume() {    	
-    	// calculate the time since the last fetch, if it's more than 6 hours we force a pull (operating carts is a temporal business, after all)
-    	if (lastStatusFetch != null) {
-	    	Date now = new Date();
-	    	long elapsedMilliSec = now.getTime() - lastStatusFetch.getTime();
-	    	if (elapsedMilliSec > 21600000)
-	    		updateStatus();
-    	}
-    	
+    protected void onResume() {
+    	if (updateOnResume)
+    		updateStatus();
+    	updateOnResume = true;
     	super.onResume();
     }
     
@@ -86,7 +77,6 @@ public class Home extends Activity {
     	if (statuses != null)
     	{
     		bundle.putParcelableArrayList("statuses", statuses);
-    		bundle.putLong("lastStatusFetch", lastStatusFetch.getTime());
     	}
     }
     
@@ -147,16 +137,6 @@ public class Home extends Activity {
 			infoBody.setText(status.getInfoBody());
 			infoBody.setTextAppearance(this, R.style.StatusContent);
 			container.addView(infoBody);
-		}
-		
-		// show the time of the last successful fetch
-		if (lastStatusFetch != null)
-		{
-			TextView lastUpdate = new TextView(this);
-			SimpleDateFormat dateFormat = new SimpleDateFormat(getResources().getText(R.string.date_format).toString());
-			lastUpdate.setText(dateFormat.format(lastStatusFetch));
-			lastUpdate.setTextAppearance(this, R.style.Footer);
-			container.addView(lastUpdate);
 		}
     }
     
@@ -245,7 +225,6 @@ public class Home extends Activity {
     		if (result != null) {
     			// save this in our instance
     			statuses = result;
-				lastStatusFetch = new Date();
     			updateUiFromCurrentStatus();
     		}
     	}
