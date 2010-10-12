@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -183,6 +182,7 @@ public class Home extends Activity {
     					try {
     						status.setLastUpdate(formatter.parse(currentStatus.getString("updated_at")));
     					} catch (ParseException e) {
+    						status.setLastUpdate(new Date());
     						e.printStackTrace();
     					}					
     					JSONObject info = currentStatus.getJSONObject("info");
