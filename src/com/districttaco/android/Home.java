@@ -108,6 +108,7 @@ public class Home extends Activity {
 			TextView locationDescription = new TextView(this);
 			locationDescription.setText(status.getLocationDescription());
 			locationDescription.setTextAppearance(this, R.style.StatusContent);
+			locationDescription.setPadding(12, 0, 0, 0);
 			container.addView(locationDescription);
 			TextView special = new TextView(this);
 			special.setText(R.string.special);
@@ -116,10 +117,12 @@ public class Home extends Activity {
 			TextView statusDetail = new TextView(this);
 			statusDetail.setText(status.getStatusText());
 			statusDetail.setTextAppearance(this, R.style.StatusContent);
+			statusDetail.setPadding(12, 0, 0, 0);
 			container.addView(statusDetail);
 			TextView infoHeader = new TextView(this);
 			infoHeader.setText(status.getInfoHeader());
 			infoHeader.setTextAppearance(this, R.style.InfoHeader);
+			infoHeader.setPadding(0, 16, 0, 0);
 			container.addView(infoHeader);
 			TextView infoTitle = new TextView(this);
 			infoTitle.setText(status.getInfoTitle());
@@ -128,6 +131,7 @@ public class Home extends Activity {
 			TextView infoBody = new TextView(this);
 			infoBody.setText(status.getInfoBody());
 			infoBody.setTextAppearance(this, R.style.StatusContent);
+			infoBody.setPadding(12, 0, 0, 0);
 			container.addView(infoBody);
 		}
     }
