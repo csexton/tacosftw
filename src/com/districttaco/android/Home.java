@@ -33,6 +33,7 @@ import android.widget.TextView;
 public class Home extends Activity {
 	private final String statusUrl = "http://carte.districttaco.com/status.json";
 	private ArrayList<Status> statuses = null;
+	private Date lastFetch = null;
 	private ProgressBar progressBar = null;
 	private boolean updateOnResume = true;
 	
@@ -47,6 +48,9 @@ public class Home extends Activity {
         
         if (savedInstanceState != null) {
         	statuses = savedInstanceState.getParcelableArrayList("statuses");
+        	long l = savedInstanceState.getLong("lastFetch");
+        	if (l != 0)
+        		lastFetch = new Date(l);
         	updateUiFromCurrentStatus();
         	updateOnResume = false;
         }
@@ -74,9 +78,9 @@ public class Home extends Activity {
     public void onSaveInstanceState(Bundle bundle)
     {
     	if (statuses != null)
-    	{
     		bundle.putParcelableArrayList("statuses", statuses);
-    	}
+    	if (lastFetch != null)
+    		bundle.putLong("lastFetch", lastFetch.getTime());
     }
     
      @Override
@@ -93,7 +97,10 @@ public class Home extends Activity {
     }
     
     private void updateUiFromCurrentStatus() {
-		
+		// if we have no status, do nothing
+    	if (statuses == null)
+    		return;
+    	
 		// dynamically create the UI from the status objects
 		LinearLayout container = (LinearLayout) findViewById(R.id.statuses);
 		container.removeAllViews();
@@ -133,6 +140,16 @@ public class Home extends Activity {
 			infoBody.setTextAppearance(this, R.style.StatusContent);
 			infoBody.setPadding(12, 0, 0, 0);
 			container.addView(infoBody);
+		}
+		
+		// update last fetch time
+		if (lastFetch != null)
+		{
+			TextView lastUpdate = new TextView(this);
+			SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.date_format));
+			lastUpdate.setText(formatter.format(lastFetch));
+			lastUpdate.setTextAppearance(this, R.style.Footer);
+			container.addView(lastUpdate);
 		}
     }
     
@@ -222,6 +239,7 @@ public class Home extends Activity {
     		if (result != null) {
     			// save this in our instance
     			statuses = result;
+    			lastFetch = new Date();
     			updateUiFromCurrentStatus();
     		}
     	}

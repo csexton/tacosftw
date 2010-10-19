@@ -33,6 +33,6 @@
     <string name="view_map">View Map</string>
     <string name="map_title">Cart Location</string>
     <string name="status_loading">Looking for carts...</string>
-    <string name="date_format">\'Last Updated:\' E MMM d \'at\' h:mm a</string>
+    <string name="date_format">\'Last Update:\' E MMM d \'at\' h:mm a</string>
 <string name="prev_orders">Previous Orders</string>
 </resources>
