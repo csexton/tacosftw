@@ -1,0 +1,13 @@
+{
+	"name": "District Taco",
+	"version": "1.0",
+	"description": "Get cart location and other information about District Taco.",
+	"icons": { "128": "icon_128.png" },
+	"browser_action": {
+		"default_icon": "icon.png",
+		"popup": "dt.html"
+	},
+	"permissions": [
+		"http://carte.districttaco.com/"
+	]
+}
