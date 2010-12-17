@@ -33,6 +33,17 @@ $(document).ready(function() {
 			var body = this['body'];
 			var location = this['location'];
 			if (location['latitude'] != 0 && location['longitude'] != 0) {
+				var infowindow = new google.maps.InfoWindow({
+					content: body
+				});
+				var marker = new google.maps.Marker({
+					map: map,
+					position: new google.maps.LatLng(location['latitude'], location['longitude']),
+					icon: new google.maps.MarkerImage('/images/icon_48.png', new google.maps.Size(48, 48), new google.maps.Point(0, 0), new google.maps.Point(24, 24))
+				});
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
 			}
 		});
 		return false;
