@@ -1,4 +1,5 @@
 #map {
-  width: 512px;
-  height: 512px;
+	width: 512px;
+	height: 512px;
+	border: 1px solid #999;
 }
