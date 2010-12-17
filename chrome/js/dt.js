@@ -30,11 +30,10 @@ $(document).ready(function() {
 			}
 		});
 		$.each(data['statuses'], function() {
-			var body = this['body'];
 			var location = this['location'];
 			if (location['latitude'] != 0 && location['longitude'] != 0) {
 				var infowindow = new google.maps.InfoWindow({
-					content: body
+					content: '<b>' + location['description'] + '</b><br />' + this['body']
 				});
 				var marker = new google.maps.Marker({
 					map: map,
