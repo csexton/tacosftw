@@ -22,7 +22,7 @@ $(document).ready(function() {
 				var marker = new google.maps.Marker({
 					map: map,
 					position: results[0].geometry.location,
-					icon: '/images/icon_48.png'
+					icon: new google.maps.MarkerImage('/images/icon_48.png', new google.maps.Size(48, 48), new google.maps.Point(0, 0), new google.maps.Point(24, 24))
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map, marker);
