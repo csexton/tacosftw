@@ -20,7 +20,8 @@ $(document).ready(function() {
 			var marker = new google.maps.Marker({
 				map: map,
 				position: userLocation,
-				animation: google.maps.Animation.DROP
+				animation: google.maps.Animation.DROP,
+				icon: '/images/sombrero.png'
 			})
 		});
 	}
@@ -37,7 +38,7 @@ $(document).ready(function() {
 			var marker = new google.maps.Marker({
 				map: map,
 				position: results[0].geometry.location,
-				icon: new google.maps.MarkerImage('/images/icon_48.png', new google.maps.Size(48, 48), new google.maps.Point(0, 0), new google.maps.Point(24, 24))
+				icon: new google.maps.MarkerImage('/images/marker.png', new google.maps.Size(48, 31), new google.maps.Point(0, 0), new google.maps.Point(24, 15))
 			});
 			google.maps.event.addListener(marker, 'click', function() {
 				infowindow.open(map, marker);
@@ -58,7 +59,7 @@ $(document).ready(function() {
 				var marker = new google.maps.Marker({
 					map: map,
 					position: location,
-					icon: new google.maps.MarkerImage('/images/icon_48.png', new google.maps.Size(48, 48), new google.maps.Point(0, 0), new google.maps.Point(24, 24))
+					icon: new google.maps.MarkerImage('/images/marker.png', new google.maps.Size(48, 31), new google.maps.Point(0, 0), new google.maps.Point(24, 15))
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map, marker);
