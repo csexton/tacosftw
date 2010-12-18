@@ -11,21 +11,6 @@ $(document).ready(function() {
 	// this is our map bounds
 	var latLngBounds = new google.maps.LatLngBounds();
 	
-	// see if the browser supports location
-	var userLocation = null;
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			latLngBounds.extend(userLocation);
-			var marker = new google.maps.Marker({
-				map: map,
-				position: userLocation,
-				animation: google.maps.Animation.DROP,
-				clickable: false
-			})
-		});
-	}
-	
 	// add a marker for the restaurant
 	var address = '5723 Lee Highway, Arlington, VA 22207';
 	var geocoder = new google.maps.Geocoder();

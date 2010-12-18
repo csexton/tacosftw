@@ -10,7 +10,6 @@
 		"popup": "dt.html"
 	},
 	"permissions": [
-		"geolocation",
 		"http://carte.districttaco.com/"
 	]
 }
