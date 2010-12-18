@@ -35,9 +35,11 @@ $(document).ready(function() {
 	
 	// get the cart status
 	$.getJSON('http://carte.districttaco.com/status.json', function(data) {
+		var haveStatus = false;
 		$.each(data['statuses'], function() {
 			var cartLocation = this['location'];
 			if (cartLocation['latitude'] != 0 && cartLocation['longitude'] != 0) {
+				haveStatus = true;
 				var location = new google.maps.LatLng(cartLocation['latitude'], cartLocation['longitude']);
 				latLngBounds.extend(location);
 				var html = '<div><b>' + location['description'] + '</b></div><div>' + this['body'] + '</div>';
@@ -54,7 +56,13 @@ $(document).ready(function() {
 				});
 			}
 		});
-		
+
+		// make sure the icon is up-to-date
+		if (haveStatus)
+			chrome.browserAction.setIcon({ path: '/images/icon.png' });
+		else
+			chrome.browserAction.setIcon({ path: '/images/bw19.png' });
+
 		// now, calculate a point on the map that is the center of all the markers, center the map and make it show all points
 		map.setCenter(latLngBounds.getCenter());
 		map.fitBounds(latLngBounds);
