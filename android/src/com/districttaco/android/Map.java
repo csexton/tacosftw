@@ -26,29 +26,29 @@ public class Map extends MapActivity {
         // add our markers
         Bundle bundle = getIntent().getExtras();
         statuses = bundle.getParcelableArrayList("statuses");
+    	GeoPoint point = new GeoPoint((int) (33.1 * 1E6), (int) (11.2 * 1E6));
+    	OverlayItem overlayItem = new OverlayItem(point, "District Taco Restaurant", "5723 Lee Highway");
+    	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
+    	cartOverlay = new CartItemizedOverlay(drawable, this);
+    	cartOverlay.addOverlay(overlayItem);
+    	GeoPoint lastPoint = point;
         if (statuses != null && statuses.size() > 0)
         {
         	mapOverlays = mapView.getOverlays();
-        	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
-        	cartOverlay = new CartItemizedOverlay(drawable, this);
-        	GeoPoint lastPoint = null;
         	for (int i = 0; i < statuses.size(); i++)
         	{
         		Status status = statuses.get(i);
 		        if (status.getLatitude() != 0.0 && status.getLongitude() != 0.0) {
-		        	GeoPoint point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
-		        	OverlayItem overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
+		        	point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
+		        	overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
 		        	cartOverlay.addOverlay(overlayItem);
 		        	lastPoint = point;
 		        }
         	}
-        	if (lastPoint != null)
-        	{
-        		mapOverlays.add(cartOverlay);
-        		MapController controller = mapView.getController();
-        		controller.setCenter(lastPoint);
-        		controller.setZoom(15);
-        	}
+       		mapOverlays.add(cartOverlay);
+       		MapController controller = mapView.getController();
+       		controller.setCenter(lastPoint);
+       		controller.setZoom(15);
         }
     }
 
