@@ -20,8 +20,7 @@ $(document).ready(function() {
 			var marker = new google.maps.Marker({
 				map: map,
 				position: userLocation,
-				animation: google.maps.Animation.DROP,
-				icon: new google.maps.MarkerImage('/images/sombrero.png', new google.maps.Size(32, 20), new google.maps.Point(0, 0), new google.maps.Point(16, 10))
+				animation: google.maps.Animation.DROP
 			})
 		});
 	}
@@ -32,8 +31,9 @@ $(document).ready(function() {
 	geocoder.geocode({'address': address}, function (results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			latLngBounds.extend(results[0].geometry.location);
+			var html = '<b>District Taco Restaurant</b><br />5723 Lee Highway<br />Arlington, VA 22207';
 			var infowindow = new google.maps.InfoWindow({
-				content: '<b>District Taco Restaurant</b><br />5723 Lee Highway<br />Arlington, VA 22207'
+				content: html
 			});
 			var marker = new google.maps.Marker({
 				map: map,
@@ -53,13 +53,14 @@ $(document).ready(function() {
 			if (cartLocation['latitude'] != 0 && cartLocation['longitude'] != 0) {
 				var location = new google.maps.LatLng(cartLocation['latitude'], cartLocation['longitude']);
 				latLngBounds.extend(location);
+				var html = '<b>' + location['description'] + '</b><br />' + this['body'];
 				var infowindow = new google.maps.InfoWindow({
-					content: '<b>' + location['description'] + '</b><br />' + this['body']
+					content:  html
 				});
 				var marker = new google.maps.Marker({
 					map: map,
 					position: location,
-					icon: new google.maps.MarkerImage('/images/marker.png', new google.maps.Size(48, 31), new google.maps.Point(0, 0), new google.maps.Point(24, 15))
+					icon: new google.maps.MarkerImage('/images/sombrero.png', new google.maps.Size(32, 20), new google.maps.Point(0, 0), new google.maps.Point(16, 10))
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map, marker);
@@ -74,7 +75,7 @@ $(document).ready(function() {
 		// make sure zoom area is not too small
 		if (map.getZoom() > 12)
 			map.setZoom(12);
-			
+
 		return false;
 	});
 });
