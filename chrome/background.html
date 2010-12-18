@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	// do an initial status check
+	checkStatus();
+	
+	// check for a status change every 5 minutes
+	window.setInterval(function() {
+		checkStatus();
+	}, 300000);
+});
+
+function checkStatus() {
+	$.getJSON('http://carte.districttaco.com/status.json', function(data) {
+		var haveStatus = false;
+		$.each(data['statuses'], function() {
+			var cartLocation = this['location'];
+			if (cartLocation['latitude'] != 0 && cartLocation['longitude'] != 0) {
+				haveStatus = true;
+				break;
+			}
+		});
+		if (haveStatus)
+			chrome.browserAction.setIcon({ path: '/images/icon.png' });
+		else
+			chrome.browserAction.setIcon({ path: '/images/bw19.png' });
+	});
+}
+</script>
+</head>
+</html>

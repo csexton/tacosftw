@@ -1,12 +1,13 @@
 {
 	"name": "District Taco",
-	"version": "0.1.0.4",
+	"version": "0.1.0.5",
 	"description": "Restaurant and cart location information for District Taco.",
 	"icons": { "128": "/images/icon_128.png",
 	 	"48": "/images/icon_48.png"
 	},
+	"background_page": "background.html",
 	"browser_action": {
-		"default_icon": "/images/icon.png",
+		"default_icon": "/images/bw19.png",
 		"popup": "dt.html"
 	},
 	"permissions": [
