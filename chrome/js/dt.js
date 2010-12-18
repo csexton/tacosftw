@@ -20,7 +20,8 @@ $(document).ready(function() {
 			var marker = new google.maps.Marker({
 				map: map,
 				position: userLocation,
-				animation: google.maps.Animation.DROP
+				animation: google.maps.Animation.DROP,
+				clickable: false
 			})
 		});
 	}
@@ -31,7 +32,7 @@ $(document).ready(function() {
 	geocoder.geocode({'address': address}, function (results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			latLngBounds.extend(results[0].geometry.location);
-			var html = '<b>District Taco Restaurant</b><br />5723 Lee Highway<br />Arlington, VA 22207';
+			var html = '<div><b>District Taco Restaurant</b></div><div>5723 Lee Highway</div><div>Arlington, VA 22207</div>';
 			var infowindow = new google.maps.InfoWindow({
 				content: html
 			});
@@ -53,7 +54,7 @@ $(document).ready(function() {
 			if (cartLocation['latitude'] != 0 && cartLocation['longitude'] != 0) {
 				var location = new google.maps.LatLng(cartLocation['latitude'], cartLocation['longitude']);
 				latLngBounds.extend(location);
-				var html = '<b>' + location['description'] + '</b><br />' + this['body'];
+				var html = '<div><b>' + location['description'] + '</b></div><div>' + this['body'] + '</div>';
 				var infowindow = new google.maps.InfoWindow({
 					content:  html
 				});
