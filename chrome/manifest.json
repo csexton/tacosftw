@@ -1,6 +1,6 @@
 {
 	"name": "District Taco",
-	"version": "0.1.0.6",
+	"version": "0.1.0.7",
 	"description": "Restaurant and cart location information for District Taco.",
 	"icons": { "128": "/images/icon_128.png",
 	 	"48": "/images/icon_48.png"

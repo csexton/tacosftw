@@ -42,7 +42,7 @@ $(document).ready(function() {
 				haveStatus = true;
 				var location = new google.maps.LatLng(cartLocation['latitude'], cartLocation['longitude']);
 				latLngBounds.extend(location);
-				var html = '<div><b>' + cartLocation['description'] + '</b></div><div>' + this['body'] + '</div>';
+				var html = '<div><b>' + cartLocation['name'] + '</b></div><div>' + cartLocation['description'] + '</div><div><i>' + this['body'] + '</i></div>';
 				var infowindow = new google.maps.InfoWindow({
 					content:  html
 				});
