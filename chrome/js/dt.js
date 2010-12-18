@@ -21,7 +21,7 @@ $(document).ready(function() {
 				map: map,
 				position: userLocation,
 				animation: google.maps.Animation.DROP,
-				icon: '/images/sombrero.png'
+				icon: new google.maps.MarkerImage('/images/sombrero.png', new google.maps.Size(32, 20), new google.maps.Point(0, 0), new google.maps.Point(16, 10))
 			})
 		});
 	}
