@@ -3,7 +3,7 @@
 $(document).ready(function() {
 	// create the map
 	var options = {
-		zoom: 11,
+		zoom: 12,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 	var map = new google.maps.Map(document.getElementById('map'), options);
