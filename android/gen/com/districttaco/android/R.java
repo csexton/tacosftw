@@ -48,6 +48,7 @@ public final class R {
         public static final int edit_order_title=0x7f050018;
         public static final int email=0x7f050014;
         public static final int email_summary=0x7f050015;
+        public static final int load_error=0x7f050022;
         public static final int map_title=0x7f05001f;
         public static final int name=0x7f050010;
         public static final int name_summary=0x7f050011;
@@ -59,7 +60,7 @@ public final class R {
         public static final int pickup=0x7f05000c;
         public static final int picture_title=0x7f05001a;
         public static final int place_order=0x7f05000b;
-        public static final int prev_orders=0x7f050022;
+        public static final int prev_orders=0x7f050023;
         public static final int quit=0x7f05000f;
         public static final int refresh=0x7f05001d;
         public static final int settings=0x7f050005;

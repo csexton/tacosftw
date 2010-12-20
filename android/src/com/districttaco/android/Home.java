@@ -18,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -153,6 +155,20 @@ public class Home extends Activity {
 		}
     }
     
+    private void displayErrorMessage(String message) {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage(message)
+    		.setCancelable(false)
+    		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();					
+				}
+			});
+    	AlertDialog alert = builder.create();
+    	alert.show();
+    }
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -241,6 +257,8 @@ public class Home extends Activity {
     			statuses = result;
     			lastFetch = new Date();
     			updateUiFromCurrentStatus();
+    		} else {
+    			displayErrorMessage(getString(R.string.load_error));
     		}
     	}
     }
