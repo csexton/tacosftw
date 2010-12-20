@@ -14,7 +14,7 @@ public class CartItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	private Context context;
 
 	public CartItemizedOverlay(Drawable defaultMarker, Context ctx) {
-		super(boundCenterBottom(defaultMarker));
+		super(boundCenter(defaultMarker));
 		context = ctx;
 	}
 
