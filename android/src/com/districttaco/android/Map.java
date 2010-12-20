@@ -1,9 +1,13 @@
 package com.districttaco.android;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.graphics.drawable.Drawable;
+import android.location.Geocoder;
+import android.location.Address;
 import android.os.Bundle;
 
 import com.google.android.maps.*;
@@ -23,15 +27,24 @@ public class Map extends MapActivity {
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
         
+        // add the restaurant location
+    	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
+    	cartOverlay = new CartItemizedOverlay(drawable, this);
+    	GeoPoint lastPoint = null;
+		try {
+	        Geocoder geocoder = new Geocoder(this, Locale.US);
+			List<Address> addresses = geocoder.getFromLocationName("5723 Lee Highway, Arlington, VA 22207", 5);
+	    	GeoPoint point = new GeoPoint((int) (addresses.get(0).getLatitude() * 1E6), (int) (addresses.get(0).getLongitude() * 1E6));
+	    	OverlayItem overlayItem = new OverlayItem(point, "District Taco Restaurant", "5723 Lee Highway\nArlington, VA 22207");
+	    	cartOverlay.addOverlay(overlayItem);
+	    	lastPoint = point;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
         // add our markers
         Bundle bundle = getIntent().getExtras();
         statuses = bundle.getParcelableArrayList("statuses");
-    	GeoPoint point = new GeoPoint((int) (33.1 * 1E6), (int) (11.2 * 1E6));
-    	OverlayItem overlayItem = new OverlayItem(point, "District Taco Restaurant", "5723 Lee Highway");
-    	drawable = this.getResources().getDrawable(R.drawable.cartmarker);
-    	cartOverlay = new CartItemizedOverlay(drawable, this);
-    	cartOverlay.addOverlay(overlayItem);
-    	GeoPoint lastPoint = point;
         if (statuses != null && statuses.size() > 0)
         {
         	mapOverlays = mapView.getOverlays();
@@ -39,8 +52,8 @@ public class Map extends MapActivity {
         	{
         		Status status = statuses.get(i);
 		        if (status.getLatitude() != 0.0 && status.getLongitude() != 0.0) {
-		        	point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
-		        	overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
+		        	GeoPoint point = new GeoPoint((int) (status.getLatitude() * 1E6), (int) (status.getLongitude() * 1E6));
+		        	OverlayItem overlayItem = new OverlayItem(point, status.getLocationName(), status.getLocationDescription());
 		        	cartOverlay.addOverlay(overlayItem);
 		        	lastPoint = point;
 		        }
