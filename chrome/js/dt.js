@@ -3,7 +3,7 @@
 $(document).ready(function() {
 	// create the map
 	var options = {
-		zoom: 12,
+		zoom: 11,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 	var map = new google.maps.Map(document.getElementById('map'), options);
@@ -66,9 +66,10 @@ $(document).ready(function() {
 		// now, calculate a point on the map that is the center of all the markers, center the map and make it show all points
 		map.setCenter(latLngBounds.getCenter());
 		map.fitBounds(latLngBounds);
-		
-		// make sure zoom area is not too small
-		if (map.getZoom() > 12)
-			map.setZoom(12);
+
+		// I found the problem being it was too zoomed out to be useful, and the
+		// origin al logic tried to check to make sure it wasn't too small -- so
+		// I think a resonable default would be force it to 11
+		map.setZoom(11);
 	});
 });
