@@ -25,7 +25,7 @@ $(document).ready(function() {
 			var marker = new google.maps.Marker({
 				map: map,
 				position: results[0].geometry.location,
-				icon: new google.maps.MarkerImage('/images/marker.png', new google.maps.Size(48, 31), new google.maps.Point(0, 0), new google.maps.Point(24, 15))
+				icon: new google.maps.MarkerImage('/images/store_marker_48.png', new google.maps.Size(48, 48), new google.maps.Point(0, 0), new google.maps.Point(23, 47))
 			});
 			google.maps.event.addListener(marker, 'click', function() {
 				infowindow.open(map, marker);
@@ -49,7 +49,7 @@ $(document).ready(function() {
 				var marker = new google.maps.Marker({
 					map: map,
 					position: location,
-					icon: new google.maps.MarkerImage('/images/marker.png', new google.maps.Size(48, 31), new google.maps.Point(0, 0), new google.maps.Point(24, 15))
+					icon: new google.maps.MarkerImage('/images/cart_marker_48.png', new google.maps.Size(48, 48), new google.maps.Point(0, 0), new google.maps.Point(23, 47))
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map, marker);
