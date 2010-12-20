@@ -49,7 +49,7 @@ $(document).ready(function() {
 				var marker = new google.maps.Marker({
 					map: map,
 					position: location,
-					icon: new google.maps.MarkerImage('/images/sombrero.png', new google.maps.Size(32, 20), new google.maps.Point(0, 0), new google.maps.Point(16, 10))
+					icon: new google.maps.MarkerImage('/images/marker.png', new google.maps.Size(48, 31), new google.maps.Point(0, 0), new google.maps.Point(24, 15))
 				});
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.open(map, marker);
